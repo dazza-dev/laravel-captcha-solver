@@ -8,5 +8,5 @@ return [
         'any_captcha' => 'api.anycaptcha.com',
         'cap_monster' => 'api.capmonster.cloud',
         'cap_solver' => 'api.capsolver.com',
-    ]
+    ],
 ];

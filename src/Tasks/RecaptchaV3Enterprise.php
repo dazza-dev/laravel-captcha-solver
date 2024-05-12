@@ -2,10 +2,10 @@
 
 namespace LaravelCaptchaSolver\Tasks;
 
+use LaravelCaptchaSolver\CaptchaSolver;
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
-use LaravelCaptchaSolver\CaptchaSolver;
 
 class RecaptchaV3Enterprise extends CaptchaSolver implements CaptchaTaskProtocol
 {
@@ -32,7 +32,7 @@ class RecaptchaV3Enterprise extends CaptchaSolver implements CaptchaTaskProtocol
             'cookies' => $this->cookies,
         ];
 
-        if (!empty($this->proxy)) {
+        if (! empty($this->proxy)) {
             $postData['type'] = 'ReCaptchaV3EnterpriseTask';
             $postData['proxy'] = $this->proxy;
         } else {

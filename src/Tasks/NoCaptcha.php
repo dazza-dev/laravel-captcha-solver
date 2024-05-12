@@ -2,10 +2,10 @@
 
 namespace LaravelCaptchaSolver\Tasks;
 
+use LaravelCaptchaSolver\CaptchaSolver;
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
-use LaravelCaptchaSolver\CaptchaSolver;
 
 class NoCaptcha extends CaptchaSolver implements CaptchaTaskProtocol
 {

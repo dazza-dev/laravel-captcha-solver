@@ -2,8 +2,8 @@
 
 namespace LaravelCaptchaSolver\Tasks;
 
-use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\CaptchaSolver;
+use LaravelCaptchaSolver\CaptchaTaskProtocol;
 
 class CustomCaptcha extends CaptchaSolver implements CaptchaTaskProtocol
 {

@@ -2,10 +2,10 @@
 
 namespace LaravelCaptchaSolver\Tasks;
 
+use LaravelCaptchaSolver\CaptchaSolver;
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
-use LaravelCaptchaSolver\CaptchaSolver;
 
 class RecaptchaV2 extends CaptchaSolver implements CaptchaTaskProtocol
 {
@@ -23,7 +23,7 @@ class RecaptchaV2 extends CaptchaSolver implements CaptchaTaskProtocol
             'isInvisible' => $this->isInvisible,
         ];
 
-        if (!empty($this->proxy)) {
+        if (! empty($this->proxy)) {
             $postData['type'] = 'ReCaptchaV2Task';
             $postData['proxy'] = $this->proxy;
         } else {

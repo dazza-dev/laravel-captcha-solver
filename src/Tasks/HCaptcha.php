@@ -2,10 +2,10 @@
 
 namespace LaravelCaptchaSolver\Capmonster;
 
+use LaravelCaptchaSolver\CaptchaSolver;
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
-use LaravelCaptchaSolver\CaptchaSolver;
 
 class HCaptcha extends CaptchaSolver implements CaptchaTaskProtocol
 {
