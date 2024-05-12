@@ -5,22 +5,21 @@ namespace LaravelCaptchaSolver\Anycaptcha;
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
-class RecaptchaV2Proxyless extends Anycaptcha implements CaptchaTaskProtocol
+class FunCaptcha extends Anycaptcha implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait;
 
     public function getPostData()
     {
         return [
-            'type' => 'RecaptchaV2TaskProxyless',
+            'type' => 'FunCaptchaTaskProxyless',
             'websiteURL' => $this->websiteUrl,
-            'websiteKey' => $this->websiteKey,
-            'isInvisible' => $this->isInvisible,
+            'websitePublicKey' => $this->websiteKey,
         ];
     }
 
     public function getTaskSolution()
     {
-        return $this->taskInfo->solution->gRecaptchaResponse;
+        return $this->taskInfo->solution->token;
     }
 }

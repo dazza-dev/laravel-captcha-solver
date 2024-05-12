@@ -18,11 +18,9 @@ class RecaptchaV2Enterprise extends Capsolver implements CaptchaTaskProtocol
 
     public function getPostData()
     {
-        return [
-            'type' => 'ReCaptchaV2EnterpriseTask',
+        $postData = [
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
-            'proxy' => $this->proxy,
             'pageAction' => $this->pageAction,
             'enterprisePayload' => $this->enterprisePayload,
             'isInvisible' => $this->isInvisible,
@@ -30,6 +28,15 @@ class RecaptchaV2Enterprise extends Capsolver implements CaptchaTaskProtocol
             'userAgent' => $this->userAgent,
             'cookies' => $this->cookies,
         ];
+
+        if (!empty($this->proxy)) {
+            $postData['type'] = 'ReCaptchaV2EnterpriseTask';
+            $postData['proxy'] = $this->proxy;
+        } else {
+            $postData['type'] = 'ReCaptchaV2EnterpriseTaskProxyLess';
+        }
+
+        return $postData;
     }
 
     public function getTaskSolution()

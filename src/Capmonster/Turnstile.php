@@ -12,16 +12,33 @@ class Turnstile extends Capmonster implements CaptchaTaskProtocol
 
     public function getPostData()
     {
-        return [
-            'type' => 'TurnstileTask',
+        $postData = [
+            'type' => ($this->proxyAddress) ? 'TurnstileTask' : 'TurnstileTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
-            'proxyType' => $this->proxyType,
-            'proxyAddress' => $this->proxyAddress,
-            'proxyPort' => $this->proxyPort,
-            'proxyLogin' => $this->proxyLogin,
-            'proxyPassword' => $this->proxyPassword,
         ];
+
+        if ($this->proxyType) {
+            $postData['proxyType'] = $this->proxyType;
+        }
+
+        if ($this->proxyAddress) {
+            $postData['proxyAddress'] = $this->proxyAddress;
+        }
+
+        if ($this->proxyPort) {
+            $postData['proxyPort'] = $this->proxyPort;
+        }
+
+        if ($this->proxyLogin) {
+            $postData['proxyLogin'] = $this->proxyLogin;
+        }
+
+        if ($this->proxyPassword) {
+            $postData['proxyPassword'] = $this->proxyPassword;
+        }
+
+        return $postData;
     }
 
     public function getTaskSolution()

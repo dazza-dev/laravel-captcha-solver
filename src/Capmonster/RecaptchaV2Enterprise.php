@@ -16,20 +16,43 @@ class RecaptchaV2Enterprise extends Capmonster implements CaptchaTaskProtocol
 
     public function getPostData()
     {
-        return [
-            'type' => 'RecaptchaV2EnterpriseTask',
+        $postData = [
+            'type' => ($this->proxyAddress) ? 'RecaptchaV2EnterpriseTask' : 'RecaptchaV2EnterpriseTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
             'enterprisePayload' => $this->enterprisePayload,
             'apiDomain' => $this->apiDomain,
-            'proxyType' => $this->proxyType,
-            'proxyAddress' => $this->proxyAddress,
-            'proxyPort' => $this->proxyPort,
-            'proxyLogin' => $this->proxyLogin,
-            'proxyPassword' => $this->proxyPassword,
-            'userAgent' => $this->userAgent,
-            'cookies' => $this->cookies,
         ];
+
+        if ($this->proxyType) {
+            $postData['proxyType'] = $this->proxyType;
+        }
+
+        if ($this->proxyAddress) {
+            $postData['proxyAddress'] = $this->proxyAddress;
+        }
+
+        if ($this->proxyPort) {
+            $postData['proxyPort'] = $this->proxyPort;
+        }
+
+        if ($this->proxyLogin) {
+            $postData['proxyLogin'] = $this->proxyLogin;
+        }
+
+        if ($this->proxyPassword) {
+            $postData['proxyPassword'] = $this->proxyPassword;
+        }
+
+        if ($this->userAgent) {
+            $postData['userAgent'] = $this->userAgent;
+        }
+
+        if ($this->cookies) {
+            $postData['cookies'] = $this->cookies;
+        }
+
+        return $postData;
     }
 
     public function getTaskSolution()

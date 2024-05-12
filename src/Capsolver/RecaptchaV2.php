@@ -17,12 +17,17 @@ class RecaptchaV2 extends Capsolver implements CaptchaTaskProtocol
     public function getPostData()
     {
         $postData = [
-            'type' => 'ReCaptchaV2Task',
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
-            'proxy' => $this->proxy,
             'isInvisible' => $this->isInvisible,
         ];
+
+        if (!empty($this->proxy)) {
+            $postData['type'] = 'ReCaptchaV2Task';
+            $postData['proxy'] = $this->proxy;
+        } else {
+            $postData['type'] = 'ReCaptchaV2TaskProxyLess';
+        }
 
         if ($this->pageAction) {
             $postData['pageAction'] = $this->pageAction;

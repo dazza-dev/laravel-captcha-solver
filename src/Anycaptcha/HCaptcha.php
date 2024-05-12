@@ -1,33 +1,25 @@
 <?php
 
-namespace LaravelCaptchaSolver\Anticaptcha;
+namespace LaravelCaptchaSolver\Anycaptcha;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
-class NoCaptchaProxyless extends Anticaptcha implements CaptchaTaskProtocol
+class HCaptcha extends Anycaptcha implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait;
-
-    private $websiteSToken;
 
     public function getPostData()
     {
         return [
-            'type' => 'NoCaptchaTaskProxyless',
+            'type' => 'FunCaptchaTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
-            'websiteSToken' => $this->websiteSToken,
         ];
     }
 
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->gRecaptchaResponse;
-    }
-
-    public function setWebsiteSToken($value)
-    {
-        $this->websiteSToken = $value;
     }
 }

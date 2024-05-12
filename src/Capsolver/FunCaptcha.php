@@ -1,13 +1,14 @@
 <?php
 
-namespace LaravelCaptchaSolver\Capmonster;
+namespace LaravelCaptchaSolver\Capsolver;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
+use LaravelCaptchaSolver\Traits\ProxyTrait;
 
-class FunCaptchaProxyless extends Capmonster implements CaptchaTaskProtocol
+class FunCaptcha extends Capsolver implements CaptchaTaskProtocol
 {
-    use CaptchaSolverTrait;
+    use CaptchaSolverTrait, ProxyTrait;
 
     private $funcaptchaApiJSSubdomain;
 
@@ -16,11 +17,12 @@ class FunCaptchaProxyless extends Capmonster implements CaptchaTaskProtocol
     public function getPostData()
     {
         return [
-            'type' => 'NoCaptchaTask',
+            'type' => 'FunCaptchaTaskProxyLess',
             'websiteURL' => $this->websiteUrl,
             'websitePublicKey' => $this->websiteKey,
             'funcaptchaApiJSSubdomain' => $this->funcaptchaApiJSSubdomain,
             'data' => $this->data,
+            'proxy' => $this->proxy,
         ];
     }
 

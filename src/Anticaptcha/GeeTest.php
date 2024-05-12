@@ -16,20 +16,43 @@ class GeeTest extends Anticaptcha implements CaptchaTaskProtocol
 
     public function getPostData()
     {
-        return [
-            'type' => 'GeeTestTask',
+        $postData = [
+            'type' => ($this->proxyAddress) ? 'GeeTestTask' : 'GeeTestTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'geetestApiServerSubdomain' => $this->geetestApiServerSubdomain,
             'gt' => $this->websiteKey,
             'challenge' => $this->websiteChallenge,
-            'proxyType' => $this->proxyType,
-            'proxyAddress' => $this->proxyAddress,
-            'proxyPort' => $this->proxyPort,
-            'proxyLogin' => $this->proxyLogin,
-            'proxyPassword' => $this->proxyPassword,
-            'userAgent' => $this->userAgent,
-            'cookies' => $this->cookies,
         ];
+
+        if ($this->proxyType) {
+            $postData['proxyType'] = $this->proxyType;
+        }
+
+        if ($this->proxyAddress) {
+            $postData['proxyAddress'] = $this->proxyAddress;
+        }
+
+        if ($this->proxyPort) {
+            $postData['proxyPort'] = $this->proxyPort;
+        }
+
+        if ($this->proxyLogin) {
+            $postData['proxyLogin'] = $this->proxyLogin;
+        }
+
+        if ($this->proxyPassword) {
+            $postData['proxyPassword'] = $this->proxyPassword;
+        }
+
+        if ($this->userAgent) {
+            $postData['userAgent'] = $this->userAgent;
+        }
+
+        if ($this->cookies) {
+            $postData['cookies'] = $this->cookies;
+        }
+
+        return $postData;
     }
 
     public function getTaskSolution()

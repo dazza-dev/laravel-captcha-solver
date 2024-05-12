@@ -18,17 +18,24 @@ class RecaptchaV3 extends Capsolver implements CaptchaTaskProtocol
 
     public function getPostData()
     {
-        return [
-            'type' => 'ReCaptchaV3Task',
+        $postData = [
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
-            'proxy' => $this->proxy,
             'pageAction' => $this->pageAction,
             'minScore' => $this->minScore,
             'apiDomain' => $this->apiDomain,
             'userAgent' => $this->userAgent,
             'cookies' => $this->cookies,
         ];
+
+        if (!empty($this->proxy)) {
+            $postData['type'] = 'ReCaptchaV3Task';
+            $postData['proxy'] = $this->proxy;
+        } else {
+            $postData['type'] = 'ReCaptchaV3TaskProxyLess';
+        }
+
+        return $postData;
     }
 
     public function getTaskSolution()

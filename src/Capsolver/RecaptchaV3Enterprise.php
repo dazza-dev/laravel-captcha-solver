@@ -20,11 +20,9 @@ class RecaptchaV3Enterprise extends Capsolver implements CaptchaTaskProtocol
 
     public function getPostData()
     {
-        return [
-            'type' => 'ReCaptchaV3EnterpriseTask',
+        $postData = [
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
-            'proxy' => $this->proxy,
             'pageAction' => $this->pageAction,
             'enterprisePayload' => $this->enterprisePayload,
             'minScore' => $this->minScore,
@@ -32,6 +30,15 @@ class RecaptchaV3Enterprise extends Capsolver implements CaptchaTaskProtocol
             'userAgent' => $this->userAgent,
             'cookies' => $this->cookies,
         ];
+
+        if (!empty($this->proxy)) {
+            $postData['type'] = 'ReCaptchaV3EnterpriseTask';
+            $postData['proxy'] = $this->proxy;
+        } else {
+            $postData['type'] = 'ReCaptchaV3EnterpriseTaskProxyLess';
+        }
+
+        return $postData;
     }
 
     public function getTaskSolution()

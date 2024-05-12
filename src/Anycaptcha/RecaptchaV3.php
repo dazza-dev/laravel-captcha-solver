@@ -5,7 +5,7 @@ namespace LaravelCaptchaSolver\Anycaptcha;
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
-class RecaptchaV3Proxyless extends Anycaptcha implements CaptchaTaskProtocol
+class RecaptchaV3 extends Anycaptcha implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait;
 

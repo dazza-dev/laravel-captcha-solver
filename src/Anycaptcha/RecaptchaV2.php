@@ -5,16 +5,17 @@ namespace LaravelCaptchaSolver\Anycaptcha;
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
-class HCaptchaProxyless extends Anycaptcha implements CaptchaTaskProtocol
+class RecaptchaV2 extends Anycaptcha implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait;
 
     public function getPostData()
     {
         return [
-            'type' => 'FunCaptchaTaskProxyless',
+            'type' => 'RecaptchaV2TaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
+            'isInvisible' => $this->isInvisible,
         ];
     }
 

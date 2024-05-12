@@ -18,15 +18,22 @@ class GeeTest extends Capsolver implements CaptchaTaskProtocol
 
     public function getPostData()
     {
-        return [
-            'type' => 'GeeTestTask',
+        $postData = [
             'websiteURL' => $this->websiteUrl,
             'gt' => $this->websiteKey,
             'challenge' => $this->challenge,
             'captchaId' => $this->captchaId,
             'geetestApiServerSubdomain' => $this->geetestApiServerSubdomain,
-            'proxy' => $this->proxy,
         ];
+
+        if (!empty($this->proxy)) {
+            $postData['type'] = 'GeeTestTask';
+            $postData['proxy'] = $this->proxy;
+        } else {
+            $postData['type'] = 'GeeTestTaskProxyLess';
+        }
+
+        return $postData;
     }
 
     public function getTaskSolution()

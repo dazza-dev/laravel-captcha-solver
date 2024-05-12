@@ -22,7 +22,7 @@ class CaptchaSolver
 
     public function __construct()
     {
-        $this->setKey(env('CAPTCHA_SOLVER_API_KEY'));
+        $this->setClientKey(env('CAPTCHA_SOLVER_API_KEY'));
     }
 
     /**
@@ -223,12 +223,7 @@ class CaptchaSolver
         $this->scheme = $scheme;
     }
 
-    /**
-     * Set client access key, must be 32 bytes long
-     *
-     * @param  string  $key
-     */
-    public function setKey($key)
+    public function setClientKey($key)
     {
         $this->clientKey = $key;
     }

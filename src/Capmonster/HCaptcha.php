@@ -14,20 +14,43 @@ class HCaptcha extends Capmonster implements CaptchaTaskProtocol
 
     public function getPostData()
     {
-        return [
-            'type' => 'HCaptchaTask',
+        $postData = [
+            'type' => ($this->proxyAddress) ? 'HCaptchaTask' : 'HCaptchaTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
             'isInvisible' => $this->isInvisible,
             'data' => $this->data,
-            'proxyType' => $this->proxyType,
-            'proxyAddress' => $this->proxyAddress,
-            'proxyPort' => $this->proxyPort,
-            'proxyLogin' => $this->proxyLogin,
-            'proxyPassword' => $this->proxyPassword,
-            'userAgent' => $this->userAgent,
-            'cookies' => $this->cookies,
         ];
+
+        if ($this->proxyType) {
+            $postData['proxyType'] = $this->proxyType;
+        }
+
+        if ($this->proxyAddress) {
+            $postData['proxyAddress'] = $this->proxyAddress;
+        }
+
+        if ($this->proxyPort) {
+            $postData['proxyPort'] = $this->proxyPort;
+        }
+
+        if ($this->proxyLogin) {
+            $postData['proxyLogin'] = $this->proxyLogin;
+        }
+
+        if ($this->proxyPassword) {
+            $postData['proxyPassword'] = $this->proxyPassword;
+        }
+
+        if ($this->userAgent) {
+            $postData['userAgent'] = $this->userAgent;
+        }
+
+        if ($this->cookies) {
+            $postData['cookies'] = $this->cookies;
+        }
+
+        return $postData;
     }
 
     public function getTaskSolution()

@@ -22,8 +22,8 @@ class GeeTest extends Capmonster implements CaptchaTaskProtocol
 
     public function getPostData()
     {
-        return [
-            'type' => 'GeeTestTask',
+        $postData = [
+            'type' => ($this->proxyAddress) ? 'GeeTestTask' : 'GeeTestTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'gt' => $this->websiteKey,
             'challenge' => $this->websiteChallenge,
@@ -31,13 +31,33 @@ class GeeTest extends Capmonster implements CaptchaTaskProtocol
             'geetestGetLib' => $this->geetestGetLib,
             'version' => $this->version,
             'initParameters' => $this->initParameters,
-            'proxyType' => $this->proxyType,
-            'proxyAddress' => $this->proxyAddress,
-            'proxyPort' => $this->proxyPort,
-            'proxyLogin' => $this->proxyLogin,
-            'proxyPassword' => $this->proxyPassword,
-            'userAgent' => $this->userAgent,
         ];
+
+        if ($this->proxyType) {
+            $postData['proxyType'] = $this->proxyType;
+        }
+
+        if ($this->proxyAddress) {
+            $postData['proxyAddress'] = $this->proxyAddress;
+        }
+
+        if ($this->proxyPort) {
+            $postData['proxyPort'] = $this->proxyPort;
+        }
+
+        if ($this->proxyLogin) {
+            $postData['proxyLogin'] = $this->proxyLogin;
+        }
+
+        if ($this->proxyPassword) {
+            $postData['proxyPassword'] = $this->proxyPassword;
+        }
+
+        if ($this->userAgent) {
+            $postData['userAgent'] = $this->userAgent;
+        }
+
+        return $postData;
     }
 
     public function getTaskSolution()
