@@ -1,25 +1,33 @@
 <?php
 
-namespace LaravelCaptchaSolver\Anticaptcha;
+namespace LaravelCaptchaSolver\Capmonster;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
+use LaravelCaptchaSolver\CaptchaSolver;
 
-class NoCaptcha extends Anticaptcha implements CaptchaTaskProtocol
+class HCaptcha extends CaptchaSolver implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait, ProxyTrait;
 
-    private $websiteSToken;
+    private $data;
 
     public function getPostData()
     {
         $postData = [
-            'type' => ($this->proxyAddress) ? 'NoCaptchaTask' :  'NoCaptchaTaskProxyless',
+            'type' => ($this->proxyAddress) ? 'HCaptchaTask' : 'HCaptchaTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
-            'websiteSToken' => $this->websiteSToken,
         ];
+
+        if ($this->isInvisible) {
+            $postData['isInvisible'] = $this->isInvisible;
+        }
+
+        if ($this->data) {
+            $postData['data'] = $this->data;
+        }
 
         if ($this->proxyType) {
             $postData['proxyType'] = $this->proxyType;
@@ -54,11 +62,11 @@ class NoCaptcha extends Anticaptcha implements CaptchaTaskProtocol
 
     public function getTaskSolution()
     {
-        return $this->taskInfo->solution->gRecaptchaResponse;
+        return $this->taskInfo->solution->token;
     }
 
-    public function setWebsiteSToken($value)
+    public function setData($value)
     {
-        $this->websiteSToken = $value;
+        $this->data = $value;
     }
 }

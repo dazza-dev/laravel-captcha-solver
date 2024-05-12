@@ -1,26 +1,31 @@
 <?php
 
-namespace LaravelCaptchaSolver\Capmonster;
+namespace LaravelCaptchaSolver\Tasks;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
+use LaravelCaptchaSolver\CaptchaSolver;
 
-class HCaptcha extends Capmonster implements CaptchaTaskProtocol
+class FunCaptcha extends CaptchaSolver implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait, ProxyTrait;
-
-    private $data;
 
     public function getPostData()
     {
         $postData = [
-            'type' => ($this->proxyAddress) ? 'HCaptchaTask' : 'HCaptchaTaskProxyless',
+            'type' => ($this->proxyAddress) ? 'FunCaptchaTask' : 'FunCaptchaTaskProxyless',
             'websiteURL' => $this->websiteUrl,
-            'websiteKey' => $this->websiteKey,
-            'isInvisible' => $this->isInvisible,
-            'data' => $this->data,
+            'websitePublicKey' => $this->websiteKey,
         ];
+
+        if ($this->apiSubdomain) {
+            $postData['funcaptchaApiJSSubdomain'] = $this->apiSubdomain;
+        }
+
+        if ($this->data) {
+            $postData['data'] = $this->data;
+        }
 
         if ($this->proxyType) {
             $postData['proxyType'] = $this->proxyType;
@@ -56,10 +61,5 @@ class HCaptcha extends Capmonster implements CaptchaTaskProtocol
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->token;
-    }
-
-    public function setData($value)
-    {
-        $this->data = $value;
     }
 }

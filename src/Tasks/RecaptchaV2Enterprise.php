@@ -1,16 +1,19 @@
 <?php
 
-namespace LaravelCaptchaSolver\Capsolver;
+namespace LaravelCaptchaSolver\Tasks;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
+use LaravelCaptchaSolver\CaptchaSolver;
 
-class RecaptchaV2 extends Capsolver implements CaptchaTaskProtocol
+class RecaptchaV2Enterprise extends CaptchaSolver implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait, ProxyTrait;
 
     private $pageAction;
+
+    private $enterprisePayload;
 
     private $apiDomain;
 
@@ -19,22 +22,17 @@ class RecaptchaV2 extends Capsolver implements CaptchaTaskProtocol
         $postData = [
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
+            'pageAction' => $this->pageAction,
+            'enterprisePayload' => $this->enterprisePayload,
             'isInvisible' => $this->isInvisible,
+            'apiDomain' => $this->apiDomain,
         ];
 
         if (!empty($this->proxy)) {
-            $postData['type'] = 'ReCaptchaV2Task';
+            $postData['type'] = 'ReCaptchaV2EnterpriseTask';
             $postData['proxy'] = $this->proxy;
         } else {
-            $postData['type'] = 'ReCaptchaV2TaskProxyLess';
-        }
-
-        if ($this->pageAction) {
-            $postData['pageAction'] = $this->pageAction;
-        }
-
-        if ($this->apiDomain) {
-            $postData['apiDomain'] = $this->apiDomain;
+            $postData['type'] = 'ReCaptchaV2EnterpriseTaskProxyLess';
         }
 
         if ($this->userAgent) {
@@ -56,6 +54,11 @@ class RecaptchaV2 extends Capsolver implements CaptchaTaskProtocol
     public function setPageAction($value)
     {
         $this->pageAction = $value;
+    }
+
+    public function setEnterprisePayload($value)
+    {
+        $this->enterprisePayload = $value;
     }
 
     public function setApiDomain($value)

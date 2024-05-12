@@ -1,14 +1,17 @@
 <?php
 
-namespace LaravelCaptchaSolver\Capmonster;
+namespace LaravelCaptchaSolver\Tasks;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
+use LaravelCaptchaSolver\CaptchaSolver;
 
-class NoCaptcha extends Capmonster implements CaptchaTaskProtocol
+class NoCaptcha extends CaptchaSolver implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait, ProxyTrait;
+
+    private $websiteSToken;
 
     private $recaptchaDataSValue;
 
@@ -19,6 +22,14 @@ class NoCaptcha extends Capmonster implements CaptchaTaskProtocol
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
         ];
+
+        if ($this->websiteSToken) {
+            $postData['websiteSToken'] = $this->websiteSToken;
+        }
+
+        if ($this->recaptchaDataSValue) {
+            $postData['recaptchaDataSValue'] = $this->recaptchaDataSValue;
+        }
 
         if ($this->proxyType) {
             $postData['proxyType'] = $this->proxyType;
@@ -40,10 +51,6 @@ class NoCaptcha extends Capmonster implements CaptchaTaskProtocol
             $postData['proxyPassword'] = $this->proxyPassword;
         }
 
-        if ($this->recaptchaDataSValue) {
-            $postData['recaptchaDataSValue'] = $this->recaptchaDataSValue;
-        }
-
         if ($this->userAgent) {
             $postData['userAgent'] = $this->userAgent;
         }
@@ -63,5 +70,10 @@ class NoCaptcha extends Capmonster implements CaptchaTaskProtocol
     public function setRecaptchaDataSValue($value)
     {
         $this->recaptchaDataSValue = $value;
+    }
+
+    public function setWebsiteSToken($value)
+    {
+        $this->websiteSToken = $value;
     }
 }

@@ -1,18 +1,19 @@
 <?php
 
-namespace LaravelCaptchaSolver\Capmonster;
+namespace LaravelCaptchaSolver\Tasks;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
+use LaravelCaptchaSolver\CaptchaSolver;
 
-class GeeTest extends Capmonster implements CaptchaTaskProtocol
+class GeeTest extends CaptchaSolver implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait, ProxyTrait;
 
-    private $websiteChallenge;
+    private $challenge;
 
-    private $geetestApiServerSubdomain;
+    private $captchaId;
 
     private $geetestGetLib;
 
@@ -26,12 +27,32 @@ class GeeTest extends Capmonster implements CaptchaTaskProtocol
             'type' => ($this->proxyAddress) ? 'GeeTestTask' : 'GeeTestTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'gt' => $this->websiteKey,
-            'challenge' => $this->websiteChallenge,
-            'geetestApiServerSubdomain' => $this->geetestApiServerSubdomain,
-            'geetestGetLib' => $this->geetestGetLib,
-            'version' => $this->version,
-            'initParameters' => $this->initParameters,
+            'challenge' => $this->challenge,
         ];
+
+        if ($this->captchaId) {
+            $postData['captchaId'] = $this->captchaId;
+        }
+
+        if ($this->apiSubdomain) {
+            $postData['geetestApiServerSubdomain'] = $this->apiSubdomain;
+        }
+
+        if ($this->geetestGetLib) {
+            $postData['geetestGetLib'] = $this->geetestGetLib;
+        }
+
+        if ($this->version) {
+            $postData['version'] = $this->version;
+        }
+
+        if ($this->initParameters) {
+            $postData['initParameters'] = $this->initParameters;
+        }
+
+        if ($this->proxy) {
+            $postData['proxy'] = $this->proxy;
+        }
 
         if ($this->proxyType) {
             $postData['proxyType'] = $this->proxyType;
@@ -57,6 +78,10 @@ class GeeTest extends Capmonster implements CaptchaTaskProtocol
             $postData['userAgent'] = $this->userAgent;
         }
 
+        if ($this->cookies) {
+            $postData['cookies'] = $this->cookies;
+        }
+
         return $postData;
     }
 
@@ -67,12 +92,12 @@ class GeeTest extends Capmonster implements CaptchaTaskProtocol
 
     public function setChallenge($value)
     {
-        $this->websiteChallenge = $value;
+        $this->challenge = $value;
     }
 
-    public function setAPISubdomain($value)
+    public function setCaptchaId($value)
     {
-        $this->geetestApiServerSubdomain = $value;
+        $this->captchaId = $value;
     }
 
     public function setGeetestGetLib($value)

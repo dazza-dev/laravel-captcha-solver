@@ -1,18 +1,17 @@
 <?php
 
-namespace LaravelCaptchaSolver\Capsolver;
+namespace LaravelCaptchaSolver\Tasks;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
+use LaravelCaptchaSolver\CaptchaSolver;
 
-class RecaptchaV3 extends Capsolver implements CaptchaTaskProtocol
+class RecaptchaV2 extends CaptchaSolver implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait, ProxyTrait;
 
     private $pageAction;
-
-    private $minScore;
 
     private $apiDomain;
 
@@ -21,18 +20,30 @@ class RecaptchaV3 extends Capsolver implements CaptchaTaskProtocol
         $postData = [
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
-            'pageAction' => $this->pageAction,
-            'minScore' => $this->minScore,
-            'apiDomain' => $this->apiDomain,
-            'userAgent' => $this->userAgent,
-            'cookies' => $this->cookies,
+            'isInvisible' => $this->isInvisible,
         ];
 
         if (!empty($this->proxy)) {
-            $postData['type'] = 'ReCaptchaV3Task';
+            $postData['type'] = 'ReCaptchaV2Task';
             $postData['proxy'] = $this->proxy;
         } else {
-            $postData['type'] = 'ReCaptchaV3TaskProxyLess';
+            $postData['type'] = 'ReCaptchaV2TaskProxyLess';
+        }
+
+        if ($this->pageAction) {
+            $postData['pageAction'] = $this->pageAction;
+        }
+
+        if ($this->apiDomain) {
+            $postData['apiDomain'] = $this->apiDomain;
+        }
+
+        if ($this->userAgent) {
+            $postData['userAgent'] = $this->userAgent;
+        }
+
+        if ($this->cookies) {
+            $postData['cookies'] = $this->cookies;
         }
 
         return $postData;
@@ -46,11 +57,6 @@ class RecaptchaV3 extends Capsolver implements CaptchaTaskProtocol
     public function setPageAction($value)
     {
         $this->pageAction = $value;
-    }
-
-    public function setMinScore($value)
-    {
-        $this->minScore = $value;
     }
 
     public function setApiDomain($value)

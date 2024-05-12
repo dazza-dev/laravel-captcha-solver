@@ -1,27 +1,22 @@
 <?php
 
-namespace LaravelCaptchaSolver\Capmonster;
+namespace LaravelCaptchaSolver\Tasks;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
+use LaravelCaptchaSolver\CaptchaSolver;
 
-class RecaptchaV2Enterprise extends Capmonster implements CaptchaTaskProtocol
+class Turnstile extends CaptchaSolver implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait, ProxyTrait;
-
-    private $enterprisePayload;
-
-    private $apiDomain;
 
     public function getPostData()
     {
         $postData = [
-            'type' => ($this->proxyAddress) ? 'RecaptchaV2EnterpriseTask' : 'RecaptchaV2EnterpriseTaskProxyless',
+            'type' => ($this->proxyAddress) ? 'TurnstileTask' : 'TurnstileTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'websiteKey' => $this->websiteKey,
-            'enterprisePayload' => $this->enterprisePayload,
-            'apiDomain' => $this->apiDomain,
         ];
 
         if ($this->proxyType) {
@@ -44,29 +39,11 @@ class RecaptchaV2Enterprise extends Capmonster implements CaptchaTaskProtocol
             $postData['proxyPassword'] = $this->proxyPassword;
         }
 
-        if ($this->userAgent) {
-            $postData['userAgent'] = $this->userAgent;
-        }
-
-        if ($this->cookies) {
-            $postData['cookies'] = $this->cookies;
-        }
-
         return $postData;
     }
 
     public function getTaskSolution()
     {
-        return $this->taskInfo->solution->gRecaptchaResponse;
-    }
-
-    public function setEnterprisePayload($value)
-    {
-        $this->enterprisePayload = $value;
-    }
-
-    public function setApiDomain($value)
-    {
-        $this->apiDomain = $value;
+        return $this->taskInfo->solution->token;
     }
 }

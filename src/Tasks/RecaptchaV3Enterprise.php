@@ -1,12 +1,13 @@
 <?php
 
-namespace LaravelCaptchaSolver\Capsolver;
+namespace LaravelCaptchaSolver\Tasks;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 use LaravelCaptchaSolver\Traits\ProxyTrait;
+use LaravelCaptchaSolver\CaptchaSolver;
 
-class RecaptchaV3Enterprise extends Capsolver implements CaptchaTaskProtocol
+class RecaptchaV3Enterprise extends CaptchaSolver implements CaptchaTaskProtocol
 {
     use CaptchaSolverTrait, ProxyTrait;
 

@@ -1,10 +1,11 @@
 <?php
 
-namespace LaravelCaptchaSolver\Anticaptcha;
+namespace LaravelCaptchaSolver\Tasks;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\CaptchaSolver;
 
-class CustomCaptcha extends Anticaptcha implements CaptchaTaskProtocol
+class CustomCaptcha extends CaptchaSolver implements CaptchaTaskProtocol
 {
     private $imageUrl;
 

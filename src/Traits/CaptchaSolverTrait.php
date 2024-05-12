@@ -8,6 +8,10 @@ trait CaptchaSolverTrait
 
     private $websiteKey;
 
+    private $apiSubdomain;
+
+    private $data;
+
     private $isInvisible = false;
 
     private $userAgent = '';
@@ -27,6 +31,16 @@ trait CaptchaSolverTrait
     public function setWebsiteKey($value)
     {
         $this->websiteKey = $value;
+    }
+
+    public function setAPISubdomain($value)
+    {
+        $this->apiSubdomain = $value;
+    }
+
+    public function setData($value)
+    {
+        $this->data = $value;
     }
 
     public function setIsInvisible($value)
