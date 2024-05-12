@@ -4,12 +4,11 @@ namespace LaravelCaptchaSolver\Capsolver;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
+use LaravelCaptchaSolver\Traits\ProxyTrait;
 
 class RecaptchaV3 extends Capsolver implements CaptchaTaskProtocol
 {
-    use CaptchaSolverTrait;
-
-    private $proxy;
+    use CaptchaSolverTrait, ProxyTrait;
 
     private $pageAction;
 
@@ -35,11 +34,6 @@ class RecaptchaV3 extends Capsolver implements CaptchaTaskProtocol
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->gRecaptchaResponse;
-    }
-
-    public function setProxy($value)
-    {
-        $this->proxy = $value;
     }
 
     public function setPageAction($value)

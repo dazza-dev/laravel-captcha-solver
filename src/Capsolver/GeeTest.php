@@ -4,18 +4,17 @@ namespace LaravelCaptchaSolver\Capsolver;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
+use LaravelCaptchaSolver\Traits\ProxyTrait;
 
 class GeeTest extends Capsolver implements CaptchaTaskProtocol
 {
-    use CaptchaSolverTrait;
+    use CaptchaSolverTrait, ProxyTrait;
 
     private $challenge;
 
     private $geetestApiServerSubdomain;
 
     private $captchaId;
-
-    private $proxy;
 
     public function getPostData()
     {
@@ -38,11 +37,6 @@ class GeeTest extends Capsolver implements CaptchaTaskProtocol
     public function setChallenge($value)
     {
         $this->challenge = $value;
-    }
-
-    public function setProxy($value)
-    {
-        $this->proxy = $value;
     }
 
     public function setCaptchaId($value)

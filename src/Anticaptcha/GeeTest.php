@@ -4,24 +4,15 @@ namespace LaravelCaptchaSolver\Anticaptcha;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
+use LaravelCaptchaSolver\Traits\ProxyTrait;
 
 class GeeTest extends Anticaptcha implements CaptchaTaskProtocol
 {
-    use CaptchaSolverTrait;
+    use CaptchaSolverTrait, ProxyTrait;
 
     private $websiteChallenge;
 
     private $geetestApiServerSubdomain;
-
-    private $proxyType = 'http';
-
-    private $proxyAddress;
-
-    private $proxyPort;
-
-    private $proxyLogin;
-
-    private $proxyPassword;
 
     public function getPostData()
     {
@@ -49,31 +40,6 @@ class GeeTest extends Anticaptcha implements CaptchaTaskProtocol
     public function setChallenge($value)
     {
         $this->websiteChallenge = $value;
-    }
-
-    public function setProxyType($value)
-    {
-        $this->proxyType = $value;
-    }
-
-    public function setProxyAddress($value)
-    {
-        $this->proxyAddress = $value;
-    }
-
-    public function setProxyPort($value)
-    {
-        $this->proxyPort = $value;
-    }
-
-    public function setProxyLogin($value)
-    {
-        $this->proxyLogin = $value;
-    }
-
-    public function setProxyPassword($value)
-    {
-        $this->proxyPassword = $value;
     }
 
     public function setAPISubdomain($value)

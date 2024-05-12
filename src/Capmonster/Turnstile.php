@@ -4,20 +4,11 @@ namespace LaravelCaptchaSolver\Capmonster;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
+use LaravelCaptchaSolver\Traits\ProxyTrait;
 
 class Turnstile extends Capmonster implements CaptchaTaskProtocol
 {
-    use CaptchaSolverTrait;
-
-    private $proxyType = 'http';
-
-    private $proxyAddress;
-
-    private $proxyPort;
-
-    private $proxyLogin;
-
-    private $proxyPassword;
+    use CaptchaSolverTrait, ProxyTrait;
 
     public function getPostData()
     {
@@ -36,30 +27,5 @@ class Turnstile extends Capmonster implements CaptchaTaskProtocol
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->token;
-    }
-
-    public function setProxyType($value)
-    {
-        $this->proxyType = $value;
-    }
-
-    public function setProxyAddress($value)
-    {
-        $this->proxyAddress = $value;
-    }
-
-    public function setProxyPort($value)
-    {
-        $this->proxyPort = $value;
-    }
-
-    public function setProxyLogin($value)
-    {
-        $this->proxyLogin = $value;
-    }
-
-    public function setProxyPassword($value)
-    {
-        $this->proxyPassword = $value;
     }
 }

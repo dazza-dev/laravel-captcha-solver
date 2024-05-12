@@ -4,8 +4,6 @@ namespace LaravelCaptchaSolver\Traits;
 
 trait CaptchaSolverTrait
 {
-    private $taskInfo;
-
     private $websiteUrl;
 
     private $websiteKey;

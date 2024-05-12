@@ -4,16 +4,15 @@ namespace LaravelCaptchaSolver\Capsolver;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
 use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
+use LaravelCaptchaSolver\Traits\ProxyTrait;
 
 class FunCaptchaProxyLess extends Capsolver implements CaptchaTaskProtocol
 {
-    use CaptchaSolverTrait;
+    use CaptchaSolverTrait, ProxyTrait;
 
     private $funcaptchaApiJSSubdomain;
 
     private $data;
-
-    private $proxy;
 
     public function getPostData()
     {
@@ -40,10 +39,5 @@ class FunCaptchaProxyLess extends Capsolver implements CaptchaTaskProtocol
     public function setData($value)
     {
         $this->data = $value;
-    }
-
-    public function setProxy($value)
-    {
-        $this->proxy = $value;
     }
 }
