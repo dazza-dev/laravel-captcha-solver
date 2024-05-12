@@ -3,14 +3,11 @@
 namespace LaravelCaptchaSolver\Capmonster;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class HCaptcha extends Capmonster implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websiteKey;
-
-    private $isInvisible = false;
+    use CaptchaSolverTrait;
 
     private $data;
 
@@ -23,10 +20,6 @@ class HCaptcha extends Capmonster implements CaptchaTaskProtocol
     private $proxyLogin;
 
     private $proxyPassword;
-
-    private $userAgent = '';
-
-    private $cookies = '';
 
     public function getPostData()
     {
@@ -46,29 +39,9 @@ class HCaptcha extends Capmonster implements CaptchaTaskProtocol
         ];
     }
 
-    public function setTaskInfo($taskInfo)
-    {
-        $this->taskInfo = $taskInfo;
-    }
-
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->token;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setWebsiteKey($value)
-    {
-        $this->websiteKey = $value;
-    }
-
-    public function setIsInvisible($value)
-    {
-        $this->isInvisible = $value;
     }
 
     public function setData($value)
@@ -99,15 +72,5 @@ class HCaptcha extends Capmonster implements CaptchaTaskProtocol
     public function setProxyPassword($value)
     {
         $this->proxyPassword = $value;
-    }
-
-    public function setUserAgent($value)
-    {
-        $this->userAgent = $value;
-    }
-
-    public function setCookies($value)
-    {
-        $this->cookies = $value;
     }
 }

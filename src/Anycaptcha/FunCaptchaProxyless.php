@@ -3,34 +3,23 @@
 namespace LaravelCaptchaSolver\Anycaptcha;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class FunCaptchaProxyless extends Anycaptcha implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websitePublicKey;
+    use CaptchaSolverTrait;
 
     public function getPostData()
     {
         return [
             'type' => 'FunCaptchaTaskProxyless',
             'websiteURL' => $this->websiteUrl,
-            'websitePublicKey' => $this->websitePublicKey,
+            'websitePublicKey' => $this->websiteKey,
         ];
     }
 
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->token;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setWebsitePublicKey($value)
-    {
-        $this->websitePublicKey = $value;
     }
 }

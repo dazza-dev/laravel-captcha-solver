@@ -3,12 +3,11 @@
 namespace LaravelCaptchaSolver\Anticaptcha;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class GeeTest extends Anticaptcha implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websiteKey;
+    use CaptchaSolverTrait;
 
     private $websiteChallenge;
 
@@ -23,10 +22,6 @@ class GeeTest extends Anticaptcha implements CaptchaTaskProtocol
     private $proxyLogin;
 
     private $proxyPassword;
-
-    private $userAgent = '';
-
-    private $cookies = '';
 
     public function getPostData()
     {
@@ -46,24 +41,9 @@ class GeeTest extends Anticaptcha implements CaptchaTaskProtocol
         ];
     }
 
-    public function setTaskInfo($taskInfo)
-    {
-        $this->taskInfo = $taskInfo;
-    }
-
     public function getTaskSolution()
     {
         return $this->taskInfo->solution;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setGTKey($value)
-    {
-        $this->websiteKey = $value;
     }
 
     public function setChallenge($value)
@@ -94,16 +74,6 @@ class GeeTest extends Anticaptcha implements CaptchaTaskProtocol
     public function setProxyPassword($value)
     {
         $this->proxyPassword = $value;
-    }
-
-    public function setUserAgent($value)
-    {
-        $this->userAgent = $value;
-    }
-
-    public function setCookies($value)
-    {
-        $this->cookies = $value;
     }
 
     public function setAPISubdomain($value)

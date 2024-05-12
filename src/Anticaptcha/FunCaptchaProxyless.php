@@ -3,14 +3,13 @@
 namespace LaravelCaptchaSolver\Anticaptcha;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class FunCaptchaProxyless extends Anticaptcha implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
+    use CaptchaSolverTrait;
 
     private $jsSubdomain;
-
-    private $websitePublicKey;
 
     public function getPostData()
     {
@@ -18,13 +17,8 @@ class FunCaptchaProxyless extends Anticaptcha implements CaptchaTaskProtocol
             'type' => 'FunCaptchaTaskProxyless',
             'websiteURL' => $this->websiteUrl,
             'funcaptchaApiJSSubdomain' => $this->jsSubdomain,
-            'websitePublicKey' => $this->websitePublicKey,
+            'websitePublicKey' => $this->websiteKey,
         ];
-    }
-
-    public function setTaskInfo($taskInfo)
-    {
-        $this->taskInfo = $taskInfo;
     }
 
     public function getTaskSolution()
@@ -32,18 +26,8 @@ class FunCaptchaProxyless extends Anticaptcha implements CaptchaTaskProtocol
         return $this->taskInfo->solution->token;
     }
 
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
     public function setJSSubdomain($value)
     {
         $this->jsSubdomain = $value;
-    }
-
-    public function setWebsitePublicKey($value)
-    {
-        $this->websitePublicKey = $value;
     }
 }

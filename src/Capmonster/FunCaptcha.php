@@ -3,12 +3,11 @@
 namespace LaravelCaptchaSolver\Capmonster;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class FunCaptcha extends Capmonster implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websitePublicKey;
+    use CaptchaSolverTrait;
 
     private $funcaptchaApiJSSubdomain;
 
@@ -24,16 +23,12 @@ class FunCaptcha extends Capmonster implements CaptchaTaskProtocol
 
     private $proxyPassword;
 
-    private $userAgent = '';
-
-    private $cookies = '';
-
     public function getPostData()
     {
         return [
             'type' => 'NoCaptchaTask',
             'websiteURL' => $this->websiteUrl,
-            'websitePublicKey' => $this->websitePublicKey,
+            'websitePublicKey' => $this->websiteKey,
             'funcaptchaApiJSSubdomain' => $this->funcaptchaApiJSSubdomain,
             'data' => $this->data,
             'proxyType' => $this->proxyType,
@@ -46,24 +41,9 @@ class FunCaptcha extends Capmonster implements CaptchaTaskProtocol
         ];
     }
 
-    public function setTaskInfo($taskInfo)
-    {
-        $this->taskInfo = $taskInfo;
-    }
-
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->token;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setWebsitePublicKey($value)
-    {
-        $this->websitePublicKey = $value;
     }
 
     public function setFuncaptchaApiJSSubdomain($value)
@@ -99,15 +79,5 @@ class FunCaptcha extends Capmonster implements CaptchaTaskProtocol
     public function setProxyPassword($value)
     {
         $this->proxyPassword = $value;
-    }
-
-    public function setUserAgent($value)
-    {
-        $this->userAgent = $value;
-    }
-
-    public function setCookies($value)
-    {
-        $this->cookies = $value;
     }
 }

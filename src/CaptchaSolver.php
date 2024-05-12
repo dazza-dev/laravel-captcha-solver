@@ -20,6 +20,11 @@ class CaptchaSolver
 
     public $taskInfo;
 
+    public function __construct()
+    {
+        $this->setKey(env('CAPTCHA_SOLVER_API_KEY'));
+    }
+
     /**
      * Submit new task and receive tracking ID
      *
@@ -140,7 +145,7 @@ class CaptchaSolver
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json; charset=utf-8',
             'Accept: application/json',
-            'Content-Length: '.strlen($postDataEncoded),
+            'Content-Length: ' . strlen($postDataEncoded),
         ]);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
@@ -163,7 +168,7 @@ class CaptchaSolver
 
     public function debout($message, $color = 'white')
     {
-        if (! $this->verboseMode) {
+        if (!$this->verboseMode) {
             return false;
         }
         if ($color != 'white' and $color != '') {
@@ -175,11 +180,11 @@ class CaptchaSolver
                 'yellow' => '1;33',
             ];
 
-            $CLIMsg = "\033[".$CLIcolors[$color]."m$message\033[0m";
+            $CLIMsg = "\033[" . $CLIcolors[$color] . "m$message\033[0m";
         } else {
             $CLIMsg = $message;
         }
-        echo $CLIMsg."\n";
+        echo $CLIMsg . "\n";
     }
 
     public function setErrorMessage($message)

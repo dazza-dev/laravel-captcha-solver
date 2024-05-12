@@ -3,12 +3,11 @@
 namespace LaravelCaptchaSolver\Capmonster;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class RecaptchaV2EnterpriseProxyless extends Capmonster implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websiteKey;
+    use CaptchaSolverTrait;
 
     private $enterprisePayload;
 
@@ -25,24 +24,9 @@ class RecaptchaV2EnterpriseProxyless extends Capmonster implements CaptchaTaskPr
         ];
     }
 
-    public function setTaskInfo($taskInfo)
-    {
-        $this->taskInfo = $taskInfo;
-    }
-
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->gRecaptchaResponse;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setWebsiteKey($value)
-    {
-        $this->websiteKey = $value;
     }
 
     public function setEnterprisePayload($value)

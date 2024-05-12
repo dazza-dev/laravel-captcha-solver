@@ -3,12 +3,11 @@
 namespace LaravelCaptchaSolver\Capmonster;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class GeeTest extends Capmonster implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websiteKey;
+    use CaptchaSolverTrait;
 
     private $websiteChallenge;
 
@@ -30,8 +29,6 @@ class GeeTest extends Capmonster implements CaptchaTaskProtocol
 
     private $proxyPassword;
 
-    private $userAgent = '';
-
     public function getPostData()
     {
         return [
@@ -52,24 +49,9 @@ class GeeTest extends Capmonster implements CaptchaTaskProtocol
         ];
     }
 
-    public function setTaskInfo($taskInfo)
-    {
-        $this->taskInfo = $taskInfo;
-    }
-
     public function getTaskSolution()
     {
         return $this->taskInfo->solution;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setGTKey($value)
-    {
-        $this->websiteKey = $value;
     }
 
     public function setChallenge($value)
@@ -100,11 +82,6 @@ class GeeTest extends Capmonster implements CaptchaTaskProtocol
     public function setProxyPassword($value)
     {
         $this->proxyPassword = $value;
-    }
-
-    public function setUserAgent($value)
-    {
-        $this->userAgent = $value;
     }
 
     public function setAPISubdomain($value)

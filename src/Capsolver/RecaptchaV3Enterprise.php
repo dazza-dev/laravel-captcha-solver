@@ -3,12 +3,11 @@
 namespace LaravelCaptchaSolver\Capsolver;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class RecaptchaV3Enterprise extends Capsolver implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websiteKey;
+    use CaptchaSolverTrait;
 
     private $proxy;
 
@@ -19,10 +18,6 @@ class RecaptchaV3Enterprise extends Capsolver implements CaptchaTaskProtocol
     private $minScore;
 
     private $apiDomain;
-
-    private $userAgent = '';
-
-    private $cookies = '';
 
     public function getPostData()
     {
@@ -40,24 +35,9 @@ class RecaptchaV3Enterprise extends Capsolver implements CaptchaTaskProtocol
         ];
     }
 
-    public function setTaskInfo($taskInfo)
-    {
-        $this->taskInfo = $taskInfo;
-    }
-
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->gRecaptchaResponse;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setWebsiteKey($value)
-    {
-        $this->websiteKey = $value;
     }
 
     public function setProxy($value)
@@ -83,15 +63,5 @@ class RecaptchaV3Enterprise extends Capsolver implements CaptchaTaskProtocol
     public function setApiDomain($value)
     {
         $this->apiDomain = $value;
-    }
-
-    public function setUserAgent($value)
-    {
-        $this->userAgent = $value;
-    }
-
-    public function setCookies($value)
-    {
-        $this->cookies = $value;
     }
 }

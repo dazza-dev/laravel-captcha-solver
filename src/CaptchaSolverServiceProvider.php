@@ -9,12 +9,12 @@ class CaptchaSolverServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/captchasolver.php' => config_path('captchasolver.php'),
-        ], 'captchasolver');
+            __DIR__ . '/../config/captcha-solver.php' => config_path('captcha-solver.php'),
+        ], 'captcha-solver');
 
         $this->mergeConfigFrom(
-            __DIR__.'/../config/captchasolver.php',
-            'captchasolver'
+            __DIR__ . '/../config/captcha-solver.php',
+            'captcha-solver'
         );
     }
 

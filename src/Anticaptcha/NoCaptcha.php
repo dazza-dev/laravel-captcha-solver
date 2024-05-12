@@ -3,12 +3,11 @@
 namespace LaravelCaptchaSolver\Anticaptcha;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class NoCaptcha extends Anticaptcha implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websiteKey;
+    use CaptchaSolverTrait;
 
     private $websiteSToken;
 
@@ -21,10 +20,6 @@ class NoCaptcha extends Anticaptcha implements CaptchaTaskProtocol
     private $proxyLogin;
 
     private $proxyPassword;
-
-    private $userAgent = '';
-
-    private $cookies = '';
 
     public function getPostData()
     {
@@ -43,24 +38,9 @@ class NoCaptcha extends Anticaptcha implements CaptchaTaskProtocol
         ];
     }
 
-    public function setTaskInfo($taskInfo)
-    {
-        $this->taskInfo = $taskInfo;
-    }
-
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->gRecaptchaResponse;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setWebsiteKey($value)
-    {
-        $this->websiteKey = $value;
     }
 
     public function setWebsiteSToken($value)
@@ -91,15 +71,5 @@ class NoCaptcha extends Anticaptcha implements CaptchaTaskProtocol
     public function setProxyPassword($value)
     {
         $this->proxyPassword = $value;
-    }
-
-    public function setUserAgent($value)
-    {
-        $this->userAgent = $value;
-    }
-
-    public function setCookies($value)
-    {
-        $this->cookies = $value;
     }
 }

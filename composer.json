@@ -1,5 +1,5 @@
 {
-  "name": "adaza90/laravel-captcha-solver",
+  "name": "dazza-dev/laravel-captcha-solver",
   "description": "Laravel implementation of anti-captcha.com, anycaptcha.com, capsolver.com and capmonster.cloud",
   "license": "Apache-2.0",
   "keywords": [

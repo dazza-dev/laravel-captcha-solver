@@ -3,14 +3,11 @@
 namespace LaravelCaptchaSolver\Anycaptcha;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class RecaptchaV2Proxyless extends Anycaptcha implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websiteKey;
-
-    private $isInvisible = false;
+    use CaptchaSolverTrait;
 
     public function getPostData()
     {
@@ -25,20 +22,5 @@ class RecaptchaV2Proxyless extends Anycaptcha implements CaptchaTaskProtocol
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->gRecaptchaResponse;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setWebsiteKey($value)
-    {
-        $this->websiteKey = $value;
-    }
-
-    public function setIsInvisible($value)
-    {
-        $this->isInvisible = $value;
     }
 }

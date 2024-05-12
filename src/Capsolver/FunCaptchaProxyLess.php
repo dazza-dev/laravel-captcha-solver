@@ -3,12 +3,11 @@
 namespace LaravelCaptchaSolver\Capsolver;
 
 use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
 
 class FunCaptchaProxyLess extends Capsolver implements CaptchaTaskProtocol
 {
-    private $websiteUrl;
-
-    private $websitePublicKey;
+    use CaptchaSolverTrait;
 
     private $funcaptchaApiJSSubdomain;
 
@@ -21,31 +20,16 @@ class FunCaptchaProxyLess extends Capsolver implements CaptchaTaskProtocol
         return [
             'type' => 'FunCaptchaTaskProxyLess',
             'websiteURL' => $this->websiteUrl,
-            'websitePublicKey' => $this->websitePublicKey,
+            'websitePublicKey' => $this->websiteKey,
             'funcaptchaApiJSSubdomain' => $this->funcaptchaApiJSSubdomain,
             'data' => $this->data,
             'proxy' => $this->proxy,
         ];
     }
 
-    public function setTaskInfo($taskInfo)
-    {
-        $this->taskInfo = $taskInfo;
-    }
-
     public function getTaskSolution()
     {
         return $this->taskInfo->solution->token;
-    }
-
-    public function setWebsiteURL($value)
-    {
-        $this->websiteUrl = $value;
-    }
-
-    public function setWebsitePublicKey($value)
-    {
-        $this->websitePublicKey = $value;
     }
 
     public function setFuncaptchaApiJSSubdomain($value)
