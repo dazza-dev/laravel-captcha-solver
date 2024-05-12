@@ -15,7 +15,7 @@ CAPTCHA_SOLVER_API_KEY=your_captcha_solver_api_key
 
 ## Captcha Resolution
 
-### reCaptcha Google with AntiCaptcha.com
+### Solve reCaptcha Google
 
 ```php
 use DazzaDev\LaravelCaptchaSolver\CaptchaSolverClient;
