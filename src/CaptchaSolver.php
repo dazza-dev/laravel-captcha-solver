@@ -20,11 +20,6 @@ class CaptchaSolver
 
     public $taskInfo;
 
-    public function __construct()
-    {
-        $this->setClientKey(env('CAPTCHA_SOLVER_API_KEY'));
-    }
-
     /**
      * Submit new task and receive tracking ID
      *
