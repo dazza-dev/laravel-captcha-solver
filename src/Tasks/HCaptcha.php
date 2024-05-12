@@ -1,6 +1,6 @@
 <?php
 
-namespace DazzaDev\LaravelCaptchaSolver\Capmonster;
+namespace DazzaDev\LaravelCaptchaSolver\Tasks;
 
 use DazzaDev\LaravelCaptchaSolver\CaptchaSolver;
 use DazzaDev\LaravelCaptchaSolver\CaptchaTaskProtocol;

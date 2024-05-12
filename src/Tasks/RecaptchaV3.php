@@ -29,7 +29,7 @@ class RecaptchaV3 extends CaptchaSolver implements CaptchaTaskProtocol
             'apiDomain' => $this->apiDomain,
         ];
 
-        if (!empty($this->proxy)) {
+        if (! empty($this->proxy)) {
             $postData['type'] = 'ReCaptchaV3Task';
             $postData['proxy'] = $this->proxy;
         } else {

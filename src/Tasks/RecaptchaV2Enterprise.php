@@ -28,7 +28,7 @@ class RecaptchaV2Enterprise extends CaptchaSolver implements CaptchaTaskProtocol
             'apiDomain' => $this->apiDomain,
         ];
 
-        if (!empty($this->proxy)) {
+        if (! empty($this->proxy)) {
             $postData['type'] = 'ReCaptchaV2EnterpriseTask';
             $postData['proxy'] = $this->proxy;
         } else {

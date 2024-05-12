@@ -18,22 +18,23 @@ CAPTCHA_SOLVER_API_KEY=your_captcha_solver_api_key
 ### reCaptcha Google with AntiCaptcha.com
 
 ```php
-use DazzaDev\LaravelCaptchaSolver\NoCaptcha;
+use DazzaDev\LaravelCaptchaSolver\CaptchaSolverClient;
 
 public function solveReCaptcha(): mixed
 {
-    $solver = new NoCaptchaProxyless;
-    $solver->setVerboseMode(false);
-    $solver->setWebsiteURL('https://targetdomain.com');
-    $solver->setWebsiteKey('recaptcha_site_key');
-    $solver->createTask();
+    $solver = new CaptchaSolverClient();
 
-    // Wait
-    $solver->waitForResult();
-
-    return $solver->getTaskSolution() ?? null;
+    return $solver->solveReCaptchaV2('websiteUrl', 'websiteKey');
 }
+```
 
+Or
+
+```php
+public function solveReCaptcha(): mixed
+{
+    return app('captcha_solver')->solveReCaptchaV2('websiteUrl', 'websiteKey');
+}
 ```
 
 ## Contributions

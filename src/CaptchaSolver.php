@@ -6,6 +6,8 @@ use DazzaDev\LaravelCaptchaSolver\Exceptions\CaptchaSolverException;
 
 class CaptchaSolver
 {
+    private $service = '';
+
     private $host = '';
 
     private $scheme = 'https';
@@ -19,6 +21,19 @@ class CaptchaSolver
     private $taskId;
 
     public $taskInfo;
+
+    public function __construct(array $params = [])
+    {
+        $this->setService($params['service'] ?? null);
+
+        // Check if the CAPTCHA_SOLVER_SERVICE is set
+        if (! $this->service) {
+            throw new CaptchaSolverException('The environment variable CAPTCHA_SOLVER_SERVICE is not configured or is empty.');
+        }
+
+        $this->setHost($params['host'] ?? null);
+        $this->setClientKey($params['api_key'] ?? null);
+    }
 
     /**
      * Submit new task and receive tracking ID
@@ -141,7 +156,7 @@ class CaptchaSolver
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json; charset=utf-8',
             'Accept: application/json',
-            'Content-Length: ' . strlen($postDataEncoded),
+            'Content-Length: '.strlen($postDataEncoded),
         ]);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
@@ -164,7 +179,7 @@ class CaptchaSolver
 
     public function debout($message, $color = 'white')
     {
-        if (!$this->verboseMode) {
+        if (! $this->verboseMode) {
             return false;
         }
         if ($color != 'white' and $color != '') {
@@ -176,11 +191,11 @@ class CaptchaSolver
                 'yellow' => '1;33',
             ];
 
-            $CLIMsg = "\033[" . $CLIcolors[$color] . "m$message\033[0m";
+            $CLIMsg = "\033[".$CLIcolors[$color]."m$message\033[0m";
         } else {
             $CLIMsg = $message;
         }
-        echo $CLIMsg . "\n";
+        echo $CLIMsg."\n";
     }
 
     public function setErrorMessage($message)
@@ -209,18 +224,23 @@ class CaptchaSolver
         $this->taskId = $taskId;
     }
 
-    public function setHost($host)
-    {
-        $this->host = $host;
-    }
-
     public function setScheme($scheme)
     {
         $this->scheme = $scheme;
     }
 
+    public function setHost($host)
+    {
+        $this->host = $host ?? config('captcha-solver.endpoints.'.$this->service);
+    }
+
+    public function setService($service)
+    {
+        $this->service = $service ?? config('captcha-solver.captcha_solver_service');
+    }
+
     public function setClientKey($key)
     {
-        $this->clientKey = $key;
+        $this->clientKey = $key ?? config('captcha-solver.captcha_solver_api_key');
     }
 }
