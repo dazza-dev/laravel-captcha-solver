@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelCaptchaSolver\Tasks;
+namespace DazzaDev\LaravelCaptchaSolver\Tasks;
 
-use LaravelCaptchaSolver\CaptchaSolver;
-use LaravelCaptchaSolver\CaptchaTaskProtocol;
+use DazzaDev\LaravelCaptchaSolver\CaptchaSolver;
+use DazzaDev\LaravelCaptchaSolver\CaptchaTaskProtocol;
 
 class CustomCaptcha extends CaptchaSolver implements CaptchaTaskProtocol
 {

@@ -18,7 +18,7 @@ CAPTCHA_SOLVER_API_KEY=your_captcha_solver_api_key
 ### reCaptcha Google with AntiCaptcha.com
 
 ```php
-use LaravelCaptchaSolver\Anticaptcha\NoCaptchaProxyless;
+use DazzaDev\LaravelCaptchaSolver\NoCaptcha;
 
 public function solveReCaptcha(): mixed
 {

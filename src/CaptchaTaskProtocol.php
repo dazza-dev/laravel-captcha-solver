@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelCaptchaSolver;
+namespace DazzaDev\LaravelCaptchaSolver;
 
 interface CaptchaTaskProtocol
 {

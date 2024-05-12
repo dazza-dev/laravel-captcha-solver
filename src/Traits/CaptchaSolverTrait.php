@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelCaptchaSolver\Traits;
+namespace DazzaDev\LaravelCaptchaSolver\Traits;
 
 trait CaptchaSolverTrait
 {

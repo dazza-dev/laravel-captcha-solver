@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelCaptchaSolver\Exceptions;
+namespace DazzaDev\LaravelCaptchaSolver\Exceptions;
 
 use Exception;
 

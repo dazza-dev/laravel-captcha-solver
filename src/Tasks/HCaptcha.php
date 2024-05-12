@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelCaptchaSolver\Capmonster;
+namespace DazzaDev\LaravelCaptchaSolver\Capmonster;
 
-use LaravelCaptchaSolver\CaptchaSolver;
-use LaravelCaptchaSolver\CaptchaTaskProtocol;
-use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
-use LaravelCaptchaSolver\Traits\ProxyTrait;
+use DazzaDev\LaravelCaptchaSolver\CaptchaSolver;
+use DazzaDev\LaravelCaptchaSolver\CaptchaTaskProtocol;
+use DazzaDev\LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
+use DazzaDev\LaravelCaptchaSolver\Traits\ProxyTrait;
 
 class HCaptcha extends CaptchaSolver implements CaptchaTaskProtocol
 {

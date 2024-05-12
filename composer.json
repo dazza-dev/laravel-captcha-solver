@@ -23,13 +23,13 @@
   ],
   "autoload": {
     "psr-4": {
-      "LaravelCaptchaSolver\\": "src/"
+      "DazzaDev\\LaravelCaptchaSolver\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "LaravelCaptchaSolver\\CaptchaSolverServiceProvider"
+        "DazzaDev\\LaravelCaptchaSolver\\CaptchaSolverServiceProvider"
       ]
     }
   }

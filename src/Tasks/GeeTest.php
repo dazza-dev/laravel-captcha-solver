@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelCaptchaSolver\Tasks;
+namespace DazzaDev\LaravelCaptchaSolver\Tasks;
 
-use LaravelCaptchaSolver\CaptchaSolver;
-use LaravelCaptchaSolver\CaptchaTaskProtocol;
-use LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
-use LaravelCaptchaSolver\Traits\ProxyTrait;
+use DazzaDev\LaravelCaptchaSolver\CaptchaSolver;
+use DazzaDev\LaravelCaptchaSolver\CaptchaTaskProtocol;
+use DazzaDev\LaravelCaptchaSolver\Traits\CaptchaSolverTrait;
+use DazzaDev\LaravelCaptchaSolver\Traits\ProxyTrait;
 
 class GeeTest extends CaptchaSolver implements CaptchaTaskProtocol
 {

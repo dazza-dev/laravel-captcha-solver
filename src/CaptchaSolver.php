@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelCaptchaSolver;
+namespace DazzaDev\LaravelCaptchaSolver;
 
-use LaravelCaptchaSolver\Exceptions\CaptchaSolverException;
+use DazzaDev\LaravelCaptchaSolver\Exceptions\CaptchaSolverException;
 
 class CaptchaSolver
 {
@@ -141,7 +141,7 @@ class CaptchaSolver
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json; charset=utf-8',
             'Accept: application/json',
-            'Content-Length: '.strlen($postDataEncoded),
+            'Content-Length: ' . strlen($postDataEncoded),
         ]);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
@@ -164,7 +164,7 @@ class CaptchaSolver
 
     public function debout($message, $color = 'white')
     {
-        if (! $this->verboseMode) {
+        if (!$this->verboseMode) {
             return false;
         }
         if ($color != 'white' and $color != '') {
@@ -176,11 +176,11 @@ class CaptchaSolver
                 'yellow' => '1;33',
             ];
 
-            $CLIMsg = "\033[".$CLIcolors[$color]."m$message\033[0m";
+            $CLIMsg = "\033[" . $CLIcolors[$color] . "m$message\033[0m";
         } else {
             $CLIMsg = $message;
         }
-        echo $CLIMsg."\n";
+        echo $CLIMsg . "\n";
     }
 
     public function setErrorMessage($message)
