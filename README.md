@@ -9,6 +9,7 @@ composer require dazza-dev/laravel-captcha-solver
 ## Configuration
 
 ```plaintext
+CAPTCHA_SOLVER_SERVICE=your_captcha_solver_service (anti_captcha, any_captcha, cap_monster, cap_solver)
 CAPTCHA_SOLVER_API_KEY=your_captcha_solver_api_key
 ```
 
@@ -23,7 +24,6 @@ public function solveReCaptcha(): mixed
 {
     $solver = new NoCaptchaProxyless;
     $solver->setVerboseMode(false);
-    $solver->setKey(env('CAPTCHA_SOLVER_API_KEY'));
     $solver->setWebsiteURL('https://targetdomain.com');
     $solver->setWebsiteKey('recaptcha_site_key');
     $solver->createTask();
@@ -42,7 +42,7 @@ Contributions are welcome. If you find any bugs or have ideas for improvements, 
 
 ## Author
 
-Multi-Tenant Sync was created by [DAZZA](https://github.com/adaza90).
+Laravel Captcha Solver was created by [DAZZA](https://github.com/adaza90).
 
 ## License
 
