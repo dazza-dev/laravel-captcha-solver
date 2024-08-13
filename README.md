@@ -43,7 +43,7 @@ Contributions are welcome. If you find any bugs or have ideas for improvements, 
 
 ## Author
 
-Laravel Captcha Solver was created by [DAZZA](https://github.com/adaza90).
+Laravel Captcha Solver was created by [DAZZA](https://github.com/dazza-dev).
 
 ## License
 
