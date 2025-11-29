@@ -1,0 +1,36 @@
+{
+  "name": "dazza-dev/laravel-captcha-solver",
+  "description": "Laravel implementation of anti-captcha.com, capsolver.com and capmonster.cloud",
+  "license": "Apache-2.0",
+  "keywords": [
+    "Anticaptcha",
+    "CapSolver",
+    "CapMonster",
+    "ReCaptcha",
+    "Laravel",
+    "PHP"
+  ],
+  "require": {
+    "php": ">=8.0",
+    "dazza-dev/captcha-solver": "^1.0"
+  },
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Andres Daza",
+      "email": "adaza90@outlook.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DazzaDev\\LaravelCaptchaSolver\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "DazzaDev\\LaravelCaptchaSolver\\CaptchaSolverServiceProvider"
+      ]
+    }
+  }
+}
